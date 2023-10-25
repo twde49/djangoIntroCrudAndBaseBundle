@@ -9,7 +9,7 @@ urlpatterns = [
     path('messages/delete/<str:id>', views.message_delete, name="delete_message"),
     path('messages/<str:id>', views.show_message, name="show_message"),
     path('register', views.register_view, name="register"),
-    path('login', views.login_view, name="register"),
-    path('logout', views.logout_view, name="register"),
+    path('login', views.login_view, name="login"),
+    path('logout', views.logout_view, name="logout"),
 
 ]
