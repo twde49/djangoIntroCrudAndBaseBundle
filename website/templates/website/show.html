@@ -1,0 +1,13 @@
+{% extends 'website/base.html' %}
+
+{% block content %}
+
+
+<a class="btn btn-light" href="{% url 'messages' %}">Retour</a>
+
+  <h2>{{ message.title }}</h2>
+  <p>{{ message.content }}</p>
+
+
+
+{% endblock %}

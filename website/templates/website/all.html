@@ -1,0 +1,51 @@
+{% extends 'website/base.html' %}
+
+{% block content %}
+
+
+
+
+
+<a class="btn btn-primary" href="{% url 'create_message'%}">créer un message</a>
+    <br>
+{% for message in messages %}
+    <br>
+    <div>
+    <h2>{{ message.title }}</h2>
+  <p>{{ message.content }}</p>
+<a class="btn btn-success" href="{% url 'show_message' message.id  %}">Voir</a>
+<a class="btn btn-warning" href="{% url 'update_message' message.id  %}">Update</a>
+<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Supprimer</button>
+    </div>
+  <br>
+
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="deleteModalLabel">Supprimer?</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Voulez-vous vraiment supprimer ce message?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Fermer</button>
+        <a href="{% url 'delete_message' message.id  %}" type="button" class="btn btn-outline-danger">Supprimer</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endfor %}
+
+<script>
+  const myModal = document.getElementById('myModal')
+const myInput = document.getElementById('myInput')
+
+myModal.addEventListener('shown.bs.modal', () => {
+  myInput.focus()
+})
+</script>
+
+{% endblock %}
