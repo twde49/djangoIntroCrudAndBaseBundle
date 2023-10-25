@@ -1,0 +1,14 @@
+{% extends 'website/base.html' %}
+
+{% block content %}
+
+<a class="btn btn-light" href="{% url 'messages' %}">Retour</a>
+
+
+<form class="form-control" method="post">{% csrf_token %}
+    {{ user_form.as_p }}
+    <input class="btn btn-success" type="submit" value="Submit" />
+</form>
+<!-- peut aussi utiliser un formulaire crée via forms.py -->
+
+{% endblock %}

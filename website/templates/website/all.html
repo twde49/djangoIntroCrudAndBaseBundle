@@ -30,7 +30,7 @@
         Voulez-vous vraiment supprimer ce message?
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Fermer</button>
+        <button type="button" class="btn btn-outline-light" data-bs-dismiss="modal">Fermer</button>
         <a href="{% url 'delete_message' message.id  %}" type="button" class="btn btn-outline-danger">Supprimer</a>
       </div>
     </div>
@@ -38,6 +38,11 @@
 </div>
 
 {% endfor %}
+
+
+    {% if user.is_authenticated %}
+        <h1>NICE</h1>
+    {% endif %}
 
 <script>
   const myModal = document.getElementById('myModal')

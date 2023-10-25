@@ -1,0 +1,15 @@
+{% extends 'website/base.html' %}
+
+{% block content %}
+
+<a class="btn btn-light" href="{% url 'messages' %}">Retour</a>
+
+
+<form class="form-control" method="post">{% csrf_token %}
+    <input type="text" name="username" placeholder="Utilisateur">
+    <input type="password" name="password" placeholder="Mot de passe">
+    <input class="btn btn-success" type="submit" value="Submit" />
+</form>
+
+
+{% endblock %}

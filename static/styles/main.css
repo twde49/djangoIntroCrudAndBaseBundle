@@ -5,3 +5,17 @@ body{
 h2{
     color: white;
 }
+
+.form-control{
+    background-color: transparent;
+    color: white;
+}
+
+.modal-content{
+    background-color: #252525;
+    color: white;
+}
+
+.modal-title{
+    color: white;
+}
