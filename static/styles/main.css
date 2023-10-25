@@ -19,3 +19,11 @@ h2{
 .modal-title{
     color: white;
 }
+
+.nav-link:hover{
+    color: white;
+}
+
+.nav-linkModified:hover{
+    color: black;
+}

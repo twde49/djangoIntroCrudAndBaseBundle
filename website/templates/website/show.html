@@ -3,11 +3,53 @@
 {% block content %}
 
 
-<a class="btn btn-light" href="{% url 'messages' %}">Retour</a>
+<a class="btn btn-light" href="{% url 'messages' %}">Back</a>
 
   <h2>{{ message.title }}</h2>
   <p>{{ message.content }}</p>
+    {% if message.category %}
+        <p>Category: {{ message.category }}</p>
+    {% endif %}
+  <p>Wrote by: {{ message.author.username }}</p>
+
+    <div class="border border-dark">
+    {% for response in message.response_set.all %}
+
+        <div class="border border-dark">
+        <p>{{ response.author.username }} wrote : </p>
+            <p><strong>{{ response.content }}</strong></p>
+        {% if response.author == request.user %}
+            <a class="btn btn-warning" href="{% url 'update_response' response.id  %}">Update Response</a>
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Remove response</button>
+        {% endif %}
+            </div>
+
+    {% endfor %}
+    </div>
 
 
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="deleteModalLabel">Supprimer?</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Voulez-vous vraiment supprimer cette réponse?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-light" data-bs-dismiss="modal">Fermer</button>
+        <a href="{% url 'delete_response' message.id  %}" type="button" class="btn btn-outline-danger">Supprimer</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <form action="{% url 'response_message' message.id %}" method="post" class="form-control">{% csrf_token %}
+        {{ response_form.as_p }}
+        <button type="submit" class="btn btn-success">respond</button>
+    </form>
 
 {% endblock %}

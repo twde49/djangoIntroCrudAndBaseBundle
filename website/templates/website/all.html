@@ -3,19 +3,27 @@
 {% block content %}
 
 
+    {% if user.is_authenticated %}
+        <h1 style="color: white">Bonjour {{ request.user }}</h1>
+   {% endif %}
 
 
-
-<a class="btn btn-info" href="{% url 'create_message'%}">Create a message</a>
     <br>
 {% for message in messages %}
     <br>
     <div>
     <h2>{{ message.title }}</h2>
   <p>{{ message.content }}</p>
+    {% if message.category %}
+        <p>Category: {{ message.category }}</p>
+    {% endif %}
+  <p>Wrote by: {{ message.author.username }}</p>
+
 <a class="btn btn-success" href="{% url 'show_message' message.id  %}">Voir</a>
+                {% if message.author == request.user %}
 <a class="btn btn-warning" href="{% url 'update_message' message.id  %}">Update</a>
 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Supprimer</button>
+    {% endif %}
     </div>
   <br>
 
@@ -39,10 +47,6 @@
 
 {% endfor %}
 
-
-    {% if user.is_authenticated %}
-        <h1>NICE</h1>
-    {% endif %}
 
 <script>
   const myModal = document.getElementById('myModal')
